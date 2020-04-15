@@ -9,7 +9,8 @@ from collections import defaultdict
 app = Flask(__name__)
 print(app)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/beer_test.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or 'sqlite:////tmp/beer_test.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
