@@ -95,4 +95,7 @@ def home():
 
 
 if __name__ == '__main__':
+    db.create()
+    import_beers()
+    import_reviews()
     app.run()
