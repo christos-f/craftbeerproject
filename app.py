@@ -53,7 +53,7 @@ def find_reviews():
 
 
 def import_beers():
-    with open('/Users/DataScience/craft-beers/final_data.json') as f:
+    with open('data/final_data.json') as f:
         data = json.load(f)
     for item in data:
         beer = Beer(name=item['beer_name'],
@@ -73,7 +73,7 @@ def import_beers():
 
 
 def import_reviews():
-    with open('/Users/DataScience/craft-beers/final_data.json') as f:
+    with open('data/final_data.json') as f:
         data = json.load(f)
     for item in data:
         beer = Beer.query.filter_by(name=item['beer_name']).first()
@@ -84,7 +84,7 @@ def import_reviews():
 
 
 def build_map_data(counts):
-    with open('/Users/DataScience/craft-beers/data.json') as f:
+    with open('data/data.json') as f:
         map_data = json.load(f)
     features = map_data['features']
     for location in features:
@@ -100,15 +100,6 @@ def home():
     data = build_map_data(reviews_per_region)
     return render_template("index.html", data=json.dumps(data))
 
-
-@app.route('/<string:beer_id>')
-def specific_beer(beer_id):
-    beer = Beer.query.filter_by(id=beer_id).first()
-    reviews = defaultdict(int)
-    for review in beer.reviews:
-        reviews[review.state] += 1
-    data = build_map_data(reviews)
-    return render_template("index.html", data=json.dumps(data))
 
 
 if __name__ == '__main__':

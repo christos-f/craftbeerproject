@@ -22,7 +22,7 @@ function getColor(d) {
 
 function style(feature) {
     return {
-        fillColor: getColor(feature.properties.count),
+        fillColor: getColor(feature.properties.density),
         weight: 1,
         opacity: 1,
         color: 'white',
@@ -67,7 +67,7 @@ info.onAdd = function (map) {
 // method that we will use to update the control based on feature properties passed
 info.update = function (props) {
     this._div.innerHTML = '<h4>Beer Enthusiasm Heat Map</h4>' +  (props ?
-        '<b>' + props.name + '</b><br />' + props.count + ' beer reviewers'
+        '<b>' + props.name + '</b><br />' + props.density + ' beer reviewers'
         : 'Hover over a state to get a <br> total count of reviewers!');
 };
 
