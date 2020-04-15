@@ -2,12 +2,14 @@ import json
 from sqlalchemy import func
 from flask import Flask, request, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
+import os
 from werkzeug.utils import redirect
 from collections import defaultdict
 
 app = Flask(__name__)
 print(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/beer_test.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/beer_test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '')
 db = SQLAlchemy(app)
 
 
@@ -39,17 +41,6 @@ class Review(db.Model):
     def __repr__(self):
         return '<Review %r>' % self.state
 
-
-@app.route('/find/beers')
-def find_beers():
-    beers = Beer.query.all()
-    return 'hello world'
-
-
-@app.route('/find/reviews')
-def find_reviews():
-    reviews = Review.query.all()
-    return 'hello world'
 
 
 def import_beers():
