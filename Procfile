@@ -1,1 +1,1 @@
-web: gunicorn craft-app.app:app
+web: gunicorn craft_app.app:app
