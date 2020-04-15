@@ -87,7 +87,7 @@ def build_map_data(counts):
 
 @app.route('/')
 def home():
-    return 'hello world'
+    return app.config['SQLALCHEMY_DATABASE_URI']
 
 @app.route('/map')
 def map_beers():
