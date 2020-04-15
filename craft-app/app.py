@@ -87,6 +87,10 @@ def build_map_data(counts):
 
 @app.route('/')
 def home():
+    return 'hello world'
+
+@app.route('/map')
+def map_beers():
     review_counts = Review.query.with_entities(Review.state, func.count(Review.state)).group_by(Review.state).all()
     reviews_per_region = {review[0]: review[1] for review in review_counts}
     data = build_map_data(reviews_per_region)
