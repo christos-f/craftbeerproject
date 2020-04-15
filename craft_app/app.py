@@ -87,15 +87,10 @@ def build_map_data(counts):
 
 @app.route('/')
 def home():
-    return app.config['SQLALCHEMY_DATABASE_URI']
-
-@app.route('/map')
-def map_beers():
     review_counts = Review.query.with_entities(Review.state, func.count(Review.state)).group_by(Review.state).all()
     reviews_per_region = {review[0]: review[1] for review in review_counts}
     data = build_map_data(reviews_per_region)
     return render_template("index.html", data=json.dumps(data))
-
 
 
 if __name__ == '__main__':
